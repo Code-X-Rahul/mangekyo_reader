@@ -11,6 +11,7 @@ const Form = () => {
         e.preventDefault()
         if (query === '') return;
         navigate(`/search/${query}`);
+        setQuery('')
     }
 
     return (

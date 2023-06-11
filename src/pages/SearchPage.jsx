@@ -23,7 +23,7 @@ const SearchPage = () => {
     }, [query])
 
     return (
-        <div className='grid grid-cols-2 gap-3 p-2 bg-zinc-800'>
+        <div className='grid grid-cols-2 gap-3 p-2 py-4 bg-zinc-800'>
             {mangaData && mangaData.results.map((manga) => <Card key={manga?.id} {...manga}/>)}
         </div>
     )

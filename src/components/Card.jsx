@@ -1,28 +1,17 @@
-import React from 'react'
-import axios from 'axios';
-const Card = ({ image, headerForImage, title }) => {
+import { Link } from "react-router-dom";
 
-    const getImg = async (url, referer) => {
-       const res = await axios.get(url, {
-            headers: {  
-                'Referer': referer,
-            },
-            responseType: 'arraybuffer'
-        });
-        let d = Buffer.from(res.data).toString('base64');
-        return`data:image/png;base64, ${d}`;
+const Card = ({ image, headerForImage, title ,id, status}) => {
 
-        // const base64 = Buffer.from(res.data, 'binary').toString('base64');
-        // return `data:${res.headers['content-type'].toLowerCase()};base64,${base64}`;
-    }
-    let data = getImg(image, headerForImage.Referer)
-    console.log(data);
+
+    const imageDta = `http://localhost:3000/image-proxy?url=${encodeURIComponent(image)}&headers=${encodeURIComponent(JSON.stringify({ Referer: headerForImage.Referer }))}`;
+
     return (
-        <div className='w-[100%] bg-teal-100 rounded-lg hover:scale-105 transition-all ease-in'>
-
-            <img className='w-[100%] aspect-square object-cover rounded-md' alt={title} />
+        <Link to={`../read/${id}`} className=' relative w-[100%] overflow-hidden bg-teal-100 rounded-lg hover:scale-105 transition-all ease-in grid'>
+            <img src={imageDta} className='w-[100%] object-cover rounded-md' alt={title} />
             <h1 className='text-center '>{title}</h1>
-        </div>
+            {status==="Ongoing" && <h3 className="text-center text-sm px-1 absolute top-0 right-0 bg-teal-400 rounded-bl-lg">{status}</h3>}
+            {status==="Completed" && <h3 className="text-center text-sm px-1 absolute top-0 right-0 bg-zinc-600 rounded-bl-lg">{status}</h3>}
+        </Link>
     )
 }
 
