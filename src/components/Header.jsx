@@ -4,9 +4,16 @@ import { RiSearchLine } from 'react-icons/ri'
 import { AiOutlineLogin } from 'react-icons/ai'
 import { AiOutlineMenu } from 'react-icons/ai'
 import Form from "./Form"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Header = () => {
+
+    const navigate = useNavigate()
+    const useHandler = () => {
+        navigate('/login')
+    }
+
+
     return (
         <header className="py-4 bg-blend-multiply bg-teal-600">
             <nav className="flex justify-between ">
@@ -32,12 +39,12 @@ const Header = () => {
                     <button className="text-black bg-slate-50 p-2 rounded-full text-lg mx-2">
                         <RiSearchLine />
                     </button>
-                    <button className="text-black bg-slate-50 p-2 rounded-full text-lg mx-2">
+                    <button onClick={useHandler} className="text-black bg-slate-50 p-2 rounded-full text-lg mx-2">
                         <AiOutlineLogin />
                     </button>
                 </div>
             </nav>
-            <Form/>
+            <Form />
         </header>
     )
 }
