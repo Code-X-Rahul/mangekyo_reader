@@ -25,8 +25,8 @@ const Home = () => {
       const results = await getManga.fetchTrendingAnime(pageNo.trendingPage);
       setTrendingAnime(results)
     }
+    fetch()
     return () => {
-      fetch()
     }
   }, [pageNo.trendingPage])
   useEffect(() => {
@@ -35,8 +35,8 @@ const Home = () => {
       const results = await getManga.fetchPopularAnime(pageNo.popularPage);
       setPopularAnime(results)
     }
+    fetch()
     return () => {
-      fetch()
     }
   }, [pageNo.popularPage])
   useEffect(() => {
@@ -45,8 +45,8 @@ const Home = () => {
       const results = await getManga.fetchRecentEpisodes(pageNo.recentPage);
       setRecentAnime(results)
     }
+    fetch()
     return () => {
-      fetch()
     }
   }, [pageNo.recentPage])
 
@@ -57,8 +57,8 @@ const Home = () => {
       console.log(results)
       setAiringS(results)
     }
+    fetch()
     return () => {
-      fetch()
     }
   }, [pageNo.recentPage])
 
