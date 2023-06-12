@@ -1,8 +1,9 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../UserContext"
 import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
-   const [name, setName] = useState()
+    const [name, setName] = useState()
+    const [email, setEmail] = useState()
 
     const { user, logout } = useAuth()
     const navigate = useNavigate()
@@ -14,8 +15,6 @@ const Dashboard = () => {
         } catch (error) {
             alert(error.message)
         }
-        navigate('/')
-
     }
     return (
         <div className="m-4 w-[80vw] mx-auto flex justify-center flex-col">
@@ -29,13 +28,13 @@ const Dashboard = () => {
                     <label htmlFor="display-name">
                         <span className="text-teal-500 text-lg">Name</span>
                     </label>
-                    <input onChange={(e)=>setName(e.target.value)} type="text" id="display-name" className="border border-teal-500 rounded-lg p-2 mx-2" value={user?.displayName} />
+                    <input onChange={(e) => setName(e.target.value)} type="text" id="display-name" className="border border-teal-500 rounded-lg p-2 mx-2" value={user?.displayName} />
                 </div>
                 <div className="flex justify-center items-center">
                     <label htmlFor="email">
                         <span className="text-teal-500 text-lg">Email</span>
                     </label>
-                    <input id="email" type="text" className="border border-teal-500 rounded-lg p-2 mx-2" value={user?.email} />
+                    <input onChange={(e) => setEmail(e.target.value)} id="email" type="text" className="border border-teal-500 rounded-lg p-2 mx-2" value={user?.email} />
                 </div>
                 <button className="text-lg text-slate-200 bg-teal-500 rounded-lg p-2 my-6">
                     Save Changes
