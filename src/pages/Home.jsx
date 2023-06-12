@@ -2,11 +2,11 @@ import React, { useContext } from 'react'
 import { useUser } from '../UserContext'
 
 const Home = () => {
-  const user = useContext(useUser)
+  const user = useUser()
   user && console.log(user);
   return (
     <div className='text-black'>
-      user
+      <h1 className='text-4xl font-bold'>Home</h1>
     </div>
   )
 }
