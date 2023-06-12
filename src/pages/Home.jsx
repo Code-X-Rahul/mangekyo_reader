@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
-import { useUser } from '../UserContext'
+import { useAuth } from '../UserContext'
+
 
 const Home = () => {
-  const user = useUser()
+  const user = useAuth()
   user && console.log(user);
   return (
     <div className='text-black'>
