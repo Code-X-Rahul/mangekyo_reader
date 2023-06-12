@@ -1,5 +1,6 @@
 import { AiOutlineLogin } from "react-icons/ai"
 import { RxPerson } from "react-icons/rx";
+import { signOut ,getAuth } from "firebase/auth";
 import {
     Dialog,
     DialogContent,
@@ -36,6 +37,16 @@ const SignUpModal = () => {
         if (password.current.value !== confirmPassword.current.value) return alert("password does not match")
         signUp(userName.current.value, password.current.value)
     }
+    const auth = getAuth();
+    const logout = () => {
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            alert("logout")
+            setUser(false)
+        }).catch((error) => {
+            // An error happened.
+        });
+    }
     return (
         <Dialog>
             <DialogTrigger className="text-black bg-slate-50 p-2 rounded-full text-lg mx-2">
@@ -69,7 +80,7 @@ const SignUpModal = () => {
                     </DialogDescription>
                 </DialogHeader>
                 <form className="flex flex-col justify-center items-center">
-                    <button onClick={userHandler} className="bg-teal-500 text-white p-2 rounded-lg my-2">Logout</button>
+                    <button onClick={logout} className="bg-teal-500 text-white p-2 rounded-lg my-2">Logout</button>
                 </form>
 
             </DialogContent>}
