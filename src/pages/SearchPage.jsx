@@ -19,12 +19,14 @@ const SearchPage = () => {
                 console.error(error);
             }
         };
-        main();
+        return () => {
+            main();
+        }
     }, [query])
 
     return (
         <div className='grid grid-cols-2 gap-3 p-2 py-4 bg-zinc-800'>
-            {animeData && animeData.results.map((manga) => <Card key={manga?.id} {...manga}/>)}
+            {animeData && animeData.results.map((manga) => <Card key={manga?.id} {...manga} />)}
         </div>
     )
 }
