@@ -19,8 +19,8 @@ const SearchPage = () => {
                 console.error(error);
             }
         };
+        main();
         return () => {
-            main();
         }
     }, [query])
 
