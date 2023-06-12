@@ -1,5 +1,4 @@
 import { AiOutlineLogin } from "react-icons/ai"
-import { RxPerson } from "react-icons/rx";
 import {
     Dialog,
     DialogContent,
@@ -21,7 +20,7 @@ const SignUpModal = () => {
 
 
 
-    const { user, signIn, signUp, gLogin, logout } = useAuth()
+    const { user, signIn, signUp, gLogin } = useAuth()
 
 
 
@@ -47,22 +46,13 @@ const SignUpModal = () => {
         }
     }
 
-    const logoutHandler = async () => {
-        try {
-            await logout();
-        } catch (error) {
-            alert(error.message)
-        }
-
-    }
 
     return (
         <Dialog>
             <DialogTrigger className="text-black bg-slate-50 p-2 rounded-full text-lg mx-2">
-                {user?.uid
-                    ? <RxPerson /> : <AiOutlineLogin />}
+                <AiOutlineLogin />
             </DialogTrigger>
-            {!user && <DialogContent className="flex flex-col justify-center items-center w-[80vw] my-[20vh] border-2 border-solid border-teal-400 p-16 rounded-2xl">
+            <DialogContent className="flex flex-col justify-center items-center w-[80vw] my-[20vh] border-2 border-solid border-teal-400 p-16 rounded-2xl">
                 <DialogHeader>
                     <DialogTitle className="text-4xl font-bold">{user ? "Login" : "Sign Up"}</DialogTitle>
                     <DialogDescription className="flex justify-center items-center">
@@ -80,19 +70,7 @@ const SignUpModal = () => {
                     <p className="text-sm text-gray-700">Don't have an account?<span onClick={() => setLogin(!login)} className="text-sm text-teal-700 cursor-pointer"> {login ? "Register" : "Login"}</span></p>
 
                 </form>
-            </DialogContent>}
-            {user && <DialogContent className="flex flex-col justify-center items-center w-[80vw] my-[20vh] border-2 border-solid border-teal-400 p-16 rounded-2xl">
-                <DialogHeader>
-                    <DialogTitle className="text-4xl font-bold">{user.uid}</DialogTitle>
-                    <DialogDescription>
-
-                    </DialogDescription>
-                </DialogHeader>
-                <form className="flex flex-col justify-center items-center">
-                    <button onClick={logoutHandler} className="bg-teal-500 text-white p-2 rounded-lg my-2">Logout</button>
-                </form>
-
-            </DialogContent>}
+            </DialogContent>
         </Dialog>
     )
 }

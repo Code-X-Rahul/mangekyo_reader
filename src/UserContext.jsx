@@ -2,6 +2,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, on
 import { useState, createContext, useContext, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./firebase";
+import { useNavigate } from "react-router-dom";
 
 const provider = new GoogleAuthProvider();
 
@@ -17,6 +18,7 @@ export function useAuth() {
 
 export function UserProvider({ children }) {
     const [user, setUser] = useState()
+    const navigate = useNavigate()
 
     function signUp(email, password) {
         return createUserWithEmailAndPassword(auth, email, password)
@@ -38,10 +40,9 @@ export function UserProvider({ children }) {
         const unSubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user)
-                const uid = user.uid;
-                alert(uid)
             } else {
-                alert("signed out")
+                setUser(null)
+                navigate('/')
             }
         });
 

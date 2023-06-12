@@ -2,10 +2,14 @@
 import logo from '../assets/logo.png'
 import { RiSearchLine } from 'react-icons/ri'
 import { AiOutlineMenu } from 'react-icons/ai'
+import { RxPerson } from "react-icons/rx";
 import Form from "./Form"
 import { Link } from 'react-router-dom'
 import SignUpModal from './SignUpModal'
+import { useAuth } from '../UserContext'
 const Header = () => {
+    const { user } = useAuth()
+
     return (
         <header className="py-4 bg-blend-multiply bg-teal-600">
             <nav className="flex justify-between ">
@@ -13,7 +17,7 @@ const Header = () => {
                     <button className="text-black bg-slate-50 p-2 rounded-full text-lg mx-2 ">
                         <AiOutlineMenu />
                     </button>
-                    <Link href="/">
+                    <Link to="/">
                         <img src={logo} alt="logo" className="w-20 mx-4" />
                     </Link>
                     {/* <div className="flex justify-between">
@@ -31,7 +35,8 @@ const Header = () => {
                     <button className="text-black bg-slate-50 p-2 rounded-full text-lg mx-2">
                         <RiSearchLine />
                     </button>
-                    <SignUpModal />
+                    {!user && <SignUpModal />}
+                    {user && <Link className='text-black bg-slate-50 p-2 rounded-full text-lg mx-2' to="/dashboard"><RxPerson /></Link>}
                 </div>
             </nav>
             <Form />
