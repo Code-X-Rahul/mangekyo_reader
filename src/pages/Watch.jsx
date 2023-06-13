@@ -5,6 +5,7 @@ import axios from "axios";
 import Player from "../components/Player";
 import AnimeInfo from "../components/AnimeInfo";
 import { DiscussionEmbed } from "disqus-react";
+import LoadingPage from "../components/LoadingPage";
 
 const Watch = () => {
     const { episodeId, animeId } = useParams()
@@ -25,7 +26,7 @@ const Watch = () => {
         queryFn: () => fetchEpisodeInfo(episodeId)
     })
 
-    if (eInfoQuery.isLoading) return (<h1>Loading....</h1>)
+    if (eInfoQuery.isLoading) return (<LoadingPage />)
     if (eInfoQuery.isError) return (<h1>Error loading data!!!</h1>)
 
 
@@ -36,6 +37,7 @@ const Watch = () => {
                 animeStreamInfo={eInfoQuery.data}
                 getInstance={(art) => console.info(art)}
             />}
+            div
             {info && <div className="">
                 <AnimeInfo info={info} animeId={animeId} />
             </div>}

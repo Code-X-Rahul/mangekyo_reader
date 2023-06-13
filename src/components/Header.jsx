@@ -11,7 +11,7 @@ const Header = () => {
     const { user } = useAuth()
 
     return (
-        <header className="py-4 bg-blend-multiply bg-teal-600">
+        <header id='header' className="py-4 bg-blend-multiply bg-teal-600">
             <nav className="flex justify-between ">
                 <div className="flex items-center justify-center">
                     <button className="text-black bg-slate-50 p-2 rounded-full text-lg mx-2 ">

@@ -7,7 +7,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "./dialog"
+} from "../shadcdn/dialog"
 
 import { useAuth } from "../UserContext"
 import { useState, useRef } from "react"

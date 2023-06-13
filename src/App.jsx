@@ -7,6 +7,7 @@ import Anime from './pages/Anime'
 import User from './pages/User'
 import Dashboard from './pages/Dashboard'
 import Watch from './pages/Watch'
+import Footer from './components/Footer'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/anime/:animeId" element={<Anime />} />
         <Route path="/anime/:animeId/watch/:episodeId" element={<Watch />} />
       </Routes>
+      <Footer />
     </>
   )
 }

@@ -4,6 +4,7 @@ import Slider from '../components/Slider'
 import Card from '../components/Card'
 import { useQuery } from 'react-query';
 import { useAnime } from '../context/AnimeContext'
+import LoadingPage from '../components/LoadingPage';
 
 
 
@@ -39,7 +40,7 @@ const Home = () => {
 
 
 
-  if (trendingQuery.isLoading) return (<h1>Loading....</h1>)
+  if (trendingQuery.isLoading || recentQuery.isLoading || popularQuery.isLoading) return (<LoadingPage />)
   if (trendingQuery.isError) return (<h1>Error loading data!!!</h1>)
 
   return (
