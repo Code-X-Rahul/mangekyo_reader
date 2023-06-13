@@ -37,7 +37,9 @@ const Watch = () => {
                 animeStreamInfo={eInfoQuery.data}
                 getInstance={(art) => console.info(art)}
             />}
-            div
+            <div>
+                <h1 className="text-2xl font-bold text-center">{info?.data?.title?.romaji}</h1>
+            </div>
             {info && <div className="">
                 <AnimeInfo info={info} animeId={animeId} />
             </div>}
