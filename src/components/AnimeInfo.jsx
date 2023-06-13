@@ -22,6 +22,8 @@ const AnimeInfo = ({ info, animeId }) => {
                     )}
                 </div>
             </div>
+            {info?.data?.relations.length !== 0 && <Slider type={info?.data?.relations} variant="anime" heading='Recommendation' />}
+
             {info?.data?.characters.length !== 0 && <CharacterCard characters={info.data?.characters} title={info?.data?.title?.romaji} />}
             {info?.data?.recommendations.length !== 0 && <Slider type={info?.data?.recommendations} variant="anime" heading='Recommendation' />}
         </div>

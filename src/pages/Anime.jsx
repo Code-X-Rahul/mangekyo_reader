@@ -31,7 +31,7 @@ const Anime = () => {
                 </div>
             </div>
             <AnimeInfo info={info} animeId={animeId} />
-            <div>
+            <div className="py-10 px-3">
                 <DiscussionEmbed shortname="mangekyoreader" fullUrl={`https://mangekyoreader.netlify.app/anime/${info.data?.id}`} identifier={info.data?.id} title={info.data?.title?.romaji}
                 />
             </div>

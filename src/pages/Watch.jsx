@@ -4,6 +4,7 @@ import { useAnime } from "../context/AnimeContext";
 import axios from "axios";
 import Player from "../components/Player";
 import AnimeInfo from "../components/AnimeInfo";
+import { DiscussionEmbed } from "disqus-react";
 
 const Watch = () => {
     const { episodeId, animeId } = useParams()
@@ -38,8 +39,12 @@ const Watch = () => {
             {info && <div className="">
                 <AnimeInfo info={info} animeId={animeId} />
             </div>}
+            <div className="py-10 px-3">
+                <DiscussionEmbed shortname="mangekyoreader" fullUrl={`https://mangekyoreader.netlify.app/anime/${animeId}/watch/${episodeId}`} identifier={episodeId} title={episodeId} />
+            </div>
         </>
     )
+
 }
 
 export default Watch
