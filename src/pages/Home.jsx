@@ -1,16 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useAuth } from '../UserContext'
 import { META } from '@consumet/extensions'
 import Slider from '../components/Slider'
 import Card from '../components/Card'
+import { useQuery } from 'react-query';
+
 
 
 const Home = () => {
   const user = useAuth()
-  const [trendingAnime, setTrendingAnime] = useState()
-  const [popularAnime, setPopularAnime] = useState()
-  const [recentAnime, setRecentAnime] = useState()
-  const [airingS, setAiringS] = useState()
   const [pageNo, setPageNo] = useState({
     trendingPage: 1,
     popularPage: 1,
@@ -19,63 +17,69 @@ const Home = () => {
   })
 
 
-  useEffect(() => {
-    const fetch = async () => {
-      const getManga = new META.Anilist();
-      const results = await getManga.fetchTrendingAnime(pageNo.trendingPage);
-      setTrendingAnime(results)
-    }
-    fetch()
-    return () => {
-    }
-  }, [pageNo.trendingPage])
-  useEffect(() => {
-    const fetch = async () => {
-      const getManga = new META.Anilist();
-      const results = await getManga.fetchPopularAnime(pageNo.popularPage);
-      setPopularAnime(results)
-    }
-    fetch()
-    return () => {
-    }
-  }, [pageNo.popularPage])
-  useEffect(() => {
-    const fetch = async () => {
-      const getManga = new META.Anilist();
-      const results = await getManga.fetchRecentEpisodes(pageNo.recentPage);
-      setRecentAnime(results)
-    }
-    fetch()
-    return () => {
-    }
-  }, [pageNo.recentPage])
+  const fetchTAnime = async () => {
+    const getAnime = new META.Anilist();
+    const results = await getAnime.fetchTrendingAnime();
+    return results
+  }
 
-  useEffect(() => {
-    const fetch = async () => {
-      const getManga = new META.Anilist();
-      const results = await getManga.fetchAiringSchedule(pageNo.recentPage);
-      console.log(results)
-      setAiringS(results)
-    }
-    fetch()
-    return () => {
-    }
-  }, [pageNo.recentPage])
+  const trendingQuery = useQuery({
+    queryKey: ['trending'],
+    queryFn: () => fetchTAnime()
+  })
 
 
-  if (!trendingAnime) return (<h1>Loading...</h1>)
+  const fetchRAnime = async () => {
+    const getAnime = new META.Anilist();
+    const results = await getAnime.fetchRecentEpisodes();
+    return results
+  }
+
+  const recentQuery = useQuery({
+    queryKey: ['recent'],
+    queryFn: () => fetchRAnime()
+  })
+
+
+  const fetchPAnime = async () => {
+    const getAnime = new META.Anilist();
+    const results = await getAnime.fetchPopularAnime();
+    return results
+  }
+
+  const popularQuery = useQuery({
+    queryKey: ['popular'],
+    queryFn: () => fetchPAnime()
+  })
+
+  const fetchAnimeS = async () => {
+    const getAnime = new META.Anilist();
+    const results = await getAnime.fetchAiringSchedule();
+    return results
+  }
+
+  const airingQuery = useQuery({
+    queryKey: ['airing'],
+    queryFn: () => fetchAnimeS()
+  })
+
+
+
+  if (trendingQuery.isLoading) return (<h1>Loading....</h1>)
+  if (trendingQuery.isError) return (<h1>Error loading data!!!</h1>)
+
   return (
     <>
       <section className='bg-zinc-800 scroll-smooth'>
-        <Slider type={trendingAnime} heading='Trending Anime' />
-        <Slider type={popularAnime} heading='Popular Anime' />
+        <Slider type={trendingQuery.data} heading='Trending Anime' />
+        <Slider type={popularQuery.data} heading='Popular Anime' />
         {/* <Slider type={recentAnime} heading='Recent Episodes' /> */}
         <div className='flex justify-start items-center flex-col'>
           <h1 className='text-3xl text-yellow-500 px-4 py-2 '>
             Recent Episodes
           </h1>
           <div className='grid gap-2 grid-cols-2 px-4 py-2 bg-zinc-800 h-auto'>
-            {recentAnime && recentAnime?.results.map((anime) => <Card key={anime?.id} height="full" width="100%" {...anime} />)}
+            {recentQuery.data?.results.map((anime) => <Card key={anime?.id} height="full" width="100%" {...anime} />)}
           </div>
         </div>
       </section>
