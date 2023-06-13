@@ -6,6 +6,7 @@ import SearchPage from './pages/SearchPage'
 import Anime from './pages/Anime'
 import User from './pages/User'
 import Dashboard from './pages/Dashboard'
+import Watch from './pages/Watch'
 
 function App() {
 
@@ -14,10 +15,11 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<User />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/search/:query" element={<SearchPage />} />
-        <Route path="/read/:animeId" element={<Anime/>} />
-        <Route path="/login" element={<User/>} />
-        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/anime/:animeId" element={<Anime />} />
+        <Route path="/anime/:animeId/watch/:episodeId" element={<Watch />} />
       </Routes>
     </>
   )

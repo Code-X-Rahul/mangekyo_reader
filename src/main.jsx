@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from './UserContext.jsx'
+import { AnimeProvider } from './context/AnimeContext.jsx'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { QueryClientProvider, QueryClient, useQuery, } from 'react-query'
 
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <UserProvider>
-          <App />
+          <AnimeProvider>
+            <App />
+          </AnimeProvider>
           <ReactQueryDevtools />
         </UserProvider>
       </QueryClientProvider>

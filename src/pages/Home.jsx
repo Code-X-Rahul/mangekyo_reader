@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useAuth } from '../UserContext'
-import { META } from '@consumet/extensions'
 import Slider from '../components/Slider'
 import Card from '../components/Card'
 import { useQuery } from 'react-query';
+import { useAnime } from '../context/AnimeContext'
 
 
 
@@ -15,48 +15,22 @@ const Home = () => {
     recentPage: 1,
     topPage: 1
   })
-
-
-  const fetchTAnime = async () => {
-    const getAnime = new META.Anilist();
-    const results = await getAnime.fetchTrendingAnime();
-    return results
-  }
+  const { fetchPAnime, fetchAnimeS, fetchRAnime, fetchTAnime } = useAnime()
 
   const trendingQuery = useQuery({
     queryKey: ['trending'],
     queryFn: () => fetchTAnime()
   })
 
-
-  const fetchRAnime = async () => {
-    const getAnime = new META.Anilist();
-    const results = await getAnime.fetchRecentEpisodes();
-    return results
-  }
-
   const recentQuery = useQuery({
     queryKey: ['recent'],
     queryFn: () => fetchRAnime()
   })
 
-
-  const fetchPAnime = async () => {
-    const getAnime = new META.Anilist();
-    const results = await getAnime.fetchPopularAnime();
-    return results
-  }
-
   const popularQuery = useQuery({
     queryKey: ['popular'],
     queryFn: () => fetchPAnime()
   })
-
-  const fetchAnimeS = async () => {
-    const getAnime = new META.Anilist();
-    const results = await getAnime.fetchAiringSchedule();
-    return results
-  }
 
   const airingQuery = useQuery({
     queryKey: ['airing'],
@@ -71,8 +45,8 @@ const Home = () => {
   return (
     <>
       <section className='bg-zinc-800 scroll-smooth'>
-        <Slider type={trendingQuery.data} heading='Trending Anime' />
-        <Slider type={popularQuery.data} heading='Popular Anime' />
+        <Slider type={trendingQuery.data?.results} heading='Trending Anime' />
+        <Slider type={popularQuery.data?.results} heading='Popular Anime' />
         {/* <Slider type={recentAnime} heading='Recent Episodes' /> */}
         <div className='flex justify-start items-center flex-col'>
           <h1 className='text-3xl text-yellow-500 px-4 py-2 '>
