@@ -8,7 +8,7 @@ const CharacterCard = ({characters, title}) => {
             </h1>
             <div className='flex justify-start items-center'>
                 <div className='grid gap-1 grid-flow-col px-1 py-2 bg-zinc-800 h-auto overflow-x-scroll hide-scrollbar'>
-                    {characters.map((c) => (
+                    {characters?.map((c) => (
                         <Link to={`../${title}/character/${c.id}`} className={` relative w-[8rem] h-60 overflow-hidden bg-[#8CA9E4] rounded-sm hover:scale-105 transition-all ease-in grid`} key={c.id}>
                             <div className="bg-zinc-900"><img src={c.image} className='w-[100%] h-full object-cover hover:opacity-60' alt={c.name?.full} /></div>
                             <div className="line-clamp-2 overflow-hidden h-12 ">

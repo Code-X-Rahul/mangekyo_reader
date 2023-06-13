@@ -42,7 +42,7 @@ export function UserProvider({ children }) {
                 setUser(user)
             } else {
                 setUser(null)
-                navigate('/')
+                // navigate('/')
             }
         });
 

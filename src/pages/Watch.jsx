@@ -3,11 +3,14 @@ import { useQuery } from 'react-query';
 import { useAnime } from "../context/AnimeContext";
 import axios from "axios";
 import Player from "../components/Player";
+import AnimeInfo from "../components/AnimeInfo";
 
 const Watch = () => {
-    const { episodeId } = useParams()
-    const {aIg} = useAnime();
-    console.log(aIg);
+    const { episodeId, animeId } = useParams()
+    const { queryFn } = useAnime();
+    const info = queryFn(animeId);
+
+
     const fetchEpisodeInfo = async (id) => {
         const url = `https://api.consumet.org/meta/anilist/watch/${id}`;
         const { data } = await axios.get(url);
@@ -32,9 +35,9 @@ const Watch = () => {
                 animeStreamInfo={eInfoQuery.data}
                 getInstance={(art) => console.info(art)}
             />}
-            <div className="p-2">
-
-            </div>
+            {info && <div className="">
+                <AnimeInfo info={info} animeId={animeId} />
+            </div>}
         </>
     )
 }
