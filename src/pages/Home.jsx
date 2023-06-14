@@ -5,6 +5,7 @@ import Card from '../components/Card'
 import { useQuery } from 'react-query';
 import { useAnime } from '../context/AnimeContext'
 import LoadingPage from '../components/LoadingPage';
+import Error from '../components/Error';
 
 
 
@@ -41,11 +42,11 @@ const Home = () => {
 
 
   if (trendingQuery.isLoading || recentQuery.isLoading || popularQuery.isLoading) return (<LoadingPage />)
-  if (trendingQuery.isError) return (<h1>Error loading data!!!</h1>)
+  if (trendingQuery.isError) return (<Error />)
 
   return (
     <>
-      <section className='bg-zinc-800 scroll-smooth'>
+      <section className='bg-zinc-800'>
         <Slider type={trendingQuery.data?.results} heading='Trending Anime' />
         <Slider type={popularQuery.data?.results} heading='Popular Anime' />
         {/* <Slider type={recentAnime} heading='Recent Episodes' /> */}
@@ -53,7 +54,7 @@ const Home = () => {
           <h1 className='text-3xl text-yellow-500 px-4 py-2 '>
             Recent Episodes
           </h1>
-          <div className='grid gap-2 grid-cols-2 px-4 py-2 bg-zinc-800 h-auto'>
+          <div className='grid gap-2 grid-cols-2 px-4 py-2 bg-zinc-800 h-auto md:grid-cols-4 lg:grid-cols-6'>
             {recentQuery.data?.results.map((anime) => <Card key={anime?.id} height="full" width="100%" {...anime} />)}
           </div>
         </div>

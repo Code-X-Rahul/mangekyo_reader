@@ -18,7 +18,7 @@ const Header = () => {
                         <AiOutlineMenu />
                     </button>
                     <Link to="/">
-                        <img src={logo} alt="logo" className="w-20 mx-4" />
+                        <img src={logo} alt="logo" className="w-[10rem] " />
                     </Link>
                     {/* <div className="flex justify-between">
                             <ul className="flex justify-center items-center">

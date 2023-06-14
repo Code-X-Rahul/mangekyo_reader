@@ -1,4 +1,5 @@
 import { META } from "@consumet/extensions";
+import axios from "axios";
 import { createContext, useContext } from "react";
 import { useQuery } from "react-query";
 
@@ -37,9 +38,14 @@ export function AnimeProvider({ children }) {
     }
 
     const fetchAnimeInfo = async (id) => {
-        const getAnime = new META.Anilist();
-        const results = await getAnime.fetchAnimeInfo(id);
-        return results
+        const url = `https://api.consumet.org/meta/anilist/info/${id}`;
+            try {
+                const { data } = await axios.get(url);
+                const results = data
+                return results;
+            } catch (err) {
+                throw new Error(err.message);
+            }
     }
 
 

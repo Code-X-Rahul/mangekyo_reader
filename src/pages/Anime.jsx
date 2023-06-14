@@ -3,6 +3,7 @@ import { useAnime } from "../context/AnimeContext";
 import AnimeInfo from "../components/AnimeInfo";
 import { DiscussionEmbed } from "disqus-react";
 import LoadingPage from "../components/LoadingPage";
+import Error from "../components/Error";
 
 
 
@@ -11,8 +12,8 @@ const Anime = () => {
     const { queryFn } = useAnime();
     const info = queryFn(animeId);
 
-    if (info.isLoading) return (<LoadingPage/>)
-    if (info.isError) return (<h1>Error loading data!!!</h1>)
+    if (info.isLoading) return (<LoadingPage />)
+    if (info.isError) return (<Error />)
 
 
     return (

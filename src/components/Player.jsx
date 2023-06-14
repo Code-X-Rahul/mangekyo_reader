@@ -73,7 +73,7 @@ const Player = ({ animeStreamInfo, option, getInstance, ...rest }) => {
     }, []);
 
     return (
-        <div className='w-[100%] h-auto'>
+        <div className='w-[100%] h-auto lg:w-[70vw]' >
             <div ref={artRef} {...rest} className='w-full h-full aspect-video'></div>
         </div>
     )

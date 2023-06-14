@@ -6,6 +6,7 @@ import Player from "../components/Player";
 import AnimeInfo from "../components/AnimeInfo";
 import { DiscussionEmbed } from "disqus-react";
 import LoadingPage from "../components/LoadingPage";
+import Error from "../components/Error";
 
 const Watch = () => {
     const { episodeId, animeId } = useParams()
@@ -17,7 +18,6 @@ const Watch = () => {
         const url = `https://api.consumet.org/meta/anilist/watch/${id}`;
         const { data } = await axios.get(url);
         const results = data
-        console.log(results);
         return results;
     }
 
@@ -27,7 +27,7 @@ const Watch = () => {
     })
 
     if (eInfoQuery.isLoading) return (<LoadingPage />)
-    if (eInfoQuery.isError) return (<h1>Error loading data!!!</h1>)
+    if (eInfoQuery.isError) return (<Error />)
 
 
 

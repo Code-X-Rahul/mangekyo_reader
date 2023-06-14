@@ -3,11 +3,11 @@ const Footer = () => {
     return (
         <footer className='flex flex-col justify-center items-center my-6'>
             <a className='text-2xl text-teal-500 animate-bounce' href="#header"> ^..^ BACK TO TOP ^..^</a>
-            <div className='w-[8rem]'>
+            <div className='w-[10rem]'>
                 <img className='w-full h-full' src={logo} alt="mangekyoreader.to" />
             </div>
             <p className='text-md text-slate-300 m-1'>
-                Copyright © MangekyoReader.to. All Rights Reserved
+                Copyright © KakoiAnime.to. All Rights Reserved
             </p>
             <div className='flex flex-col items-center justify-center text-slate-300'>
                 <p className='text-sm text-center px-4 my-1'>
